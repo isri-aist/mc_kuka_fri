@@ -15,10 +15,10 @@ RobotClient::RobotClient(AppState & state, const std::string & name)
     mc_rtc::log::error_and_throw("[MCKukaFRI] Connection to {}:{} failed", host, port);
   }
   // XXX Do we need to do this or can we be sure that we have a valid state after connection?
-  kuka::fri::LBRClient::waitForCommand();
+  KUKA::FRI::LBRClient::waitForCommand();
   // Check that the robot has a compatible command mode
   auto mode = robotState().getClientCommandMode();
-  if(mode != kuka::fri::TORQUE && mode != kuka::fri::POSITION)
+  if(mode != KUKA::FRI::TORQUE && mode != KUKA::FRI::POSITION)
   {
     mc_rtc::log::error_and_throw("[MCKukaFRI] Only support TORQUE and POSITION control modes");
   }
@@ -27,7 +27,7 @@ RobotClient::RobotClient(AppState & state, const std::string & name)
 
 void RobotClient::waitForCommand()
 {
-  kuka::fri::LBRClient::waitForCommand();
+  KUKA::FRI::LBRClient::waitForCommand();
 
   std::lock_guard<std::mutex> lck(state_.gc_mutex);
   updateMcRtcInputs();
@@ -44,7 +44,7 @@ void RobotClient::updateMcRtcInputs()
 
 void RobotClient::command()
 {
-  kuka::fri::LBRClient::command();
+  KUKA::FRI::LBRClient::command();
 
   std::lock_guard<std::mutex> lck(state_.gc_mutex);
   updateKukaCommand();
@@ -60,7 +60,7 @@ void RobotClient::updateKukaCommand()
     joints_command_[i] = robot.q()[mbcIdx][0];
   }
   robotCommand().setJointPosition(joints_command_.data());
-  if(robotState().getClientCommandMode() == kuka::fri::TORQUE) { robotCommand().setTorque(torques_command_.data()); }
+  if(robotState().getClientCommandMode() == KUKA::FRI::TORQUE) { robotCommand().setTorque(torques_command_.data()); }
 }
 
 void RobotClient::startControlThread()
@@ -82,7 +82,7 @@ void RobotClient::joinControlThread()
 
 void MainRobotClient::command()
 {
-  kuka::fri::LBRClient::command();
+  KUKA::FRI::LBRClient::command();
 
   std::lock_guard<std::mutex> lck(state_.gc_mutex);
   state_.gc.run();

@@ -19,14 +19,14 @@ endif()
 
 find_path(
   KUKA_FRI_INCLUDE_DIR
-  NAMES kuka/fri/LBRState.h
+  NAMES friLBRState.h
   HINTS ${KUKA_FRI_PREFIX})
 message(STATUS "Found KUKA_FRI directory: ${KUKA_FRI_INCLUDE_DIR}")
 
 unset(KUKA_FRI_LIBRARY CACHE)
 find_library(
   KUKA_FRI_LIBRARY
-  NAMES kuka_fri
+  NAMES FRIClient
   PATHS ${KUKA_FRI_PREFIX})
 message(STATUS "Found KUKA_FRI library: ${KUKA_FRI_LIBRARY}")
 

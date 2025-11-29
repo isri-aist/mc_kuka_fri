@@ -1,16 +1,18 @@
 #pragma once
 
+#include <thread>
+
 #include "AppState.h"
 
-#include <kuka/fri/ClientApplication.h>
-#include <kuka/fri/LBRClient.h>
-#include <kuka/fri/UdpConnection.h>
+#include <friClientApplication.h>
+#include <friLBRClient.h>
+#include <friUdpConnection.h>
 
 namespace mc_kuka_fri
 {
 
 /** Bridge a robot from mc_rtc controller to KUKA FRI */
-struct RobotClient : public kuka::fri::LBRClient
+struct RobotClient : public KUKA::FRI::LBRClient
 {
   /** Creates the client and connect to the robot */
   RobotClient(AppState & state, const std::string & name);
@@ -25,8 +27,8 @@ struct RobotClient : public kuka::fri::LBRClient
 
 protected:
   AppState & state_;
-  kuka::fri::UdpConnection connection_;
-  kuka::fri::ClientApplication app_;
+  KUKA::FRI::UdpConnection connection_;
+  KUKA::FRI::ClientApplication app_;
   std::string name_;
   std::vector<double> torques_measured_;
   std::vector<double> joints_measured_;
