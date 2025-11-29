@@ -65,7 +65,7 @@ MCKukaFRI -f conf.yaml
 
 This work was partially supported by the Research Project I.AM. through the European Union H2020 program under GA 871899.
 
-[iiwa_description]: https://github.com/epfl-lasa/iiwa_ros/tree/master/iiwa_description
-[kuka_fri]: https://github.com/epfl-lasa/kuka_fri
+[iiwa_description]:https://github.com/lbr-stack/lbr_fri_ros2_stack/tree/humble/lbr_description
+[kuka_fri]: https://github.com/lbr-stack/fri.git
 [mc_rtc]: https://github.com/jrl-umi3218/mc_rtc
-[mesh_sampling]: https://github.com/arntanguy/mesh_sampling
+[mesh_sampling]: https://github.com/isri-aist/mesh_sampling
