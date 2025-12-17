@@ -8,6 +8,8 @@
 #include <friLBRClient.h>
 #include <friUdpConnection.h>
 
+#include <chrono>
+
 namespace mc_kuka_fri
 {
 
@@ -32,9 +34,13 @@ protected:
   std::string name_;
   std::vector<double> torques_measured_;
   std::vector<double> joints_measured_;
+  std::vector<double> joints_measured_prev_;
   std::vector<double> torques_command_;
   std::vector<double> joints_command_;
   std::thread control_thread_;
+
+  std::vector<double> vel_estimated_;
+  std::chrono::steady_clock::time_point begin;
 
   void updateMcRtcInputs();
 
