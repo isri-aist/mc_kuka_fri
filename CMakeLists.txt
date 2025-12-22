@@ -30,6 +30,13 @@ function(generate_iiwa_module MODEL)
   add_custom_target(generate_${MODEL}_model ALL DEPENDS ${URDF_OUT})
   install(FILES ${URDF_OUT} DESTINATION ${INSTALL_DATADIR}/urdf/)
 
+  # Install robot module YAML file
+  set(MODULE_INSTALL_LOCATION "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/")
+  configure_file(aliases/iiwa_config.in.yaml
+                 ${CMAKE_CURRENT_BINARY_DIR}/${MODEL}.yaml @ONLY)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODEL}.yaml
+          DESTINATION ${MODULE_INSTALL_LOCATION})
+
   # Configure the mc_rtc alias
   set(ALIAS_OUT ${CMAKE_CURRENT_BINARY_DIR}/aliases/${MODEL}.yaml)
   configure_file(aliases/iiwa.in.yaml ${ALIAS_OUT} @ONLY)

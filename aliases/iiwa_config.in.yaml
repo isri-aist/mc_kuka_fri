@@ -1,0 +1,13 @@
+# Location of data files, all path in the YAML file are
+# interpreted relative to this path unless they are absolute paths
+
+path: "@INSTALL_DATADIR@"
+name: "@MODEL@"
+
+# Force sensors attached to this robot
+forceSensors:
+  - name: EndEffectorForceSensor
+    parentBody: link_7
+    X_p_f:
+      rotation: [0, 0, 0]
+      translation: [0, 0, 0]
